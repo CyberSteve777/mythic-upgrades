@@ -7,8 +7,10 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import static net.minecraft.data.server.recipe.RecipeProvider.conditionsFromItemPredicates;
+import static net.trique.mythicupgrades.MythicUpgrades.MOD_ID;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,7 +24,7 @@ public class DataGenHelper {
 
     public static void offerCustomUpgradeRecipe(Consumer<RecipeJsonProvider> exporter, Item template, Item input, Item itemMaterialUpgrade, RecipeCategory category, Item result) {
         SmithingTransformRecipeJsonBuilder.create(Ingredient.ofItems(template), Ingredient.ofItems(input), Ingredient.ofItems(itemMaterialUpgrade), category, result).
-                criterion(RecipeProvider.hasItem(() -> itemMaterialUpgrade), RecipeProvider.conditionsFromItem(itemMaterialUpgrade)).offerTo(exporter, RecipeProvider.getItemPath(result) + "_smithing");
+                criterion(RecipeProvider.hasItem(() -> itemMaterialUpgrade), RecipeProvider.conditionsFromItem(itemMaterialUpgrade)).offerTo(exporter, Identifier.of(MOD_ID, RecipeProvider.getItemPath(result) + "_smithing"));
     }
 
     public static void offerCustomSmithingTemplateCopyingRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible template, ItemConvertible duplicationMaterial, ItemConvertible resource) {
