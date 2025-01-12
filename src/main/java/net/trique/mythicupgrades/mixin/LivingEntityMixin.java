@@ -3,6 +3,7 @@ package net.trique.mythicupgrades.mixin;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 import net.trique.mythicupgrades.effect.MUEffects;
@@ -87,8 +88,8 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "hurt", at = @At(value = "RETURN"))
-    private void applyArmorEffectsForEnemy(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "hurtServer", at = @At(value = "RETURN"))
+    private void applyArmorEffectsForEnemy(ServerLevel serverLevel, DamageSource source, float f, CallbackInfoReturnable<Boolean> cir) {
         boolean was_damaged = cir.getReturnValue();
         if (was_damaged) {
             Entity attacker = source.getEntity();
@@ -102,8 +103,8 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @WrapMethod(method = "hurt")
-    private boolean reduceIncomingDamage(DamageSource source, float amount, Operation<Boolean> original) {
+    @WrapMethod(method = "hurtServer")
+    private boolean reduceIncomingDamage(ServerLevel serverLevel, DamageSource source, float amount, Operation<Boolean> original) {
         if (!this.level().isClientSide()) {
             MobEffectInstance deflection = this.getEffect(MUEffects.DAMAGE_DEFLECTION);
             if (deflection != null) {

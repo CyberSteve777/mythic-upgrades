@@ -2,7 +2,8 @@ package net.trique.mythicupgrades.item.materials;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.trique.mythicupgrades.util.MUBlockTags;
@@ -12,6 +13,7 @@ import java.util.function.Supplier;
 import static net.trique.mythicupgrades.item.MUItems.*;
 
 public enum MUToolMaterials implements Tier {
+
     AQUAMARINE(MUBlockTags.INCORRECT_FOR_AQUAMARINE_TOOL, 2923, 10.0f, 5.0f, 18, () -> Ingredient.of(AQUAMARINE_INGOT)),
     PERIDOT(MUBlockTags.INCORRECT_FOR_PERIDOT_TOOL, 2923, 10.0f, 5.0f, 18, () -> Ingredient.of(PERIDOT_INGOT)),
     RUBY(MUBlockTags.INCORRECT_FOR_RUBY_TOOL, 2923, 13.0f, 5.0f, 18, () -> Ingredient.of(RUBY_INGOT)),
@@ -29,6 +31,7 @@ public enum MUToolMaterials implements Tier {
     private final Supplier<Ingredient> repairIngredient;
 
     MUToolMaterials(final TagKey<Block> inverseTag, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+        ToolMaterial.DIAMOND
         this.inverseTag = inverseTag;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;

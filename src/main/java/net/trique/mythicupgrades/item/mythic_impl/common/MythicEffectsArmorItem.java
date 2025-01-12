@@ -6,9 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.trique.mythicupgrades.item.base.BaseMythicArmorItem;
 import net.trique.mythicupgrades.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -22,8 +23,8 @@ public class MythicEffectsArmorItem extends ArmorItem implements BaseMythicArmor
     protected final ChatFormatting color;
     protected List<Integer> effectAmplifiers;
 
-    public MythicEffectsArmorItem(Holder<ArmorMaterial> material, Type type, Properties settings, ItemEffectsList effects, String tooltipSB, List<Integer> effectAmplifiers, ChatFormatting color) {
-        super(material, type, settings);
+    public MythicEffectsArmorItem(Holder<ArmorMaterial> material, ArmorType type, Properties settings, ItemEffectsList effects, String tooltipSB, List<Integer> effectAmplifiers, ChatFormatting color) {
+        super(material.value(), type, settings);
         this.virtualItemHandler = new MythicEffectVirtualItemHandler(effects);
         this.tooltipSB = tooltipSB;
         this.color = color;
